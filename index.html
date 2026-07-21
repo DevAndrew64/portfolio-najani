@@ -6,7 +6,7 @@
     <title>Najani - Agencia de Arte</title>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* --- VARIABLES Y RESET --- */
+        /* --- colores y variables --- */
         :root {
             --bg-color: #f9f9f9;
             --text-main: #1a1a1a;
@@ -16,15 +16,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
         
-        /* --- TIPOGRAFÍA --- */
+        /* --- tipografia --- */
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
         .cursive { font-family: 'Alex Brush', cursive; font-size: 4rem; font-weight: normal; margin-bottom: 10px; }
         .logo { font-family: 'Alex Brush', cursive; font-size: 3rem; text-decoration: none; color: var(--text-main); cursor: pointer; }
         
-        /* --- NAVEGACIÓN --- */
+
         header { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
         nav { display: flex; gap: 15px; }
-        /* Botones estéticos mejorados */
+
         .nav-btn, .btn { 
             padding: 10px 24px; 
             background-color: var(--accent); 
@@ -53,9 +53,7 @@
             object-fit: cover;
         }
 
-        /* =========================================
-           VISTA 1: INICIO 
-        ========================================= */
+
         .hero { 
             height: 70vh; 
             background: url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?q=80&w=1958&auto=format&fit=crop') center/cover; 
@@ -86,9 +84,7 @@
         .user-info { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: #666; }
         .user-info img { width: 30px; height: 30px; border-radius: 50%; }
 
-        /* =========================================
-           VISTA 2: GALERÍA 
-        ========================================= */
+
         .hero-short { height: 40vh; background: url('https://images.unsplash.com/photo-1518998053401-878c73fd6f15?q=80&w=1974&auto=format&fit=crop') center/cover; display: flex; justify-content: center; align-items: center; color: white; text-align: center; position: relative;}
         .hero-short::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.3); }
         .hero-short h1 { position: relative; z-index: 1; font-size: 3rem; }
@@ -105,9 +101,7 @@
         .colab-right { display: flex; flex-direction: column; gap: 30px; }
         .colab-right img { width: 100%; height: 235px; object-fit: cover; border-radius: 8px; }
 
-        /* =========================================
-           VISTA 3: CONTACTO 
-        ========================================= */
+
         .contacto-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 60px 5%; max-width: 1200px; margin: 0 auto; align-items: start; }
         .contacto-text h1 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 2.5rem; margin-bottom: 20px; }
         .contacto-text h3 { font-family: 'Inter', sans-serif; font-weight: 600; margin-bottom: 10px; }
@@ -122,7 +116,7 @@
         
         .contacto-img img { width: 100%; height: 600px; object-fit: cover; border-radius: 8px; }
 
-        /* --- FOOTER --- */
+
         footer { border-top: 1px solid #eaeaea; padding: 60px 5% 40px; background: #fff; margin-top: 50px; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
         .footer-logo .logo { font-size: 3.5rem; }
@@ -136,7 +130,7 @@
 </head>
 <body>
 
-    <!-- CABECERA PRINCIPAL -->
+
     <header>
         <div class="logo" onclick="showPage('inicio')">Najani</div>
         <nav>
@@ -146,9 +140,7 @@
         </nav>
     </header>
 
-    <!-- ==========================================
-         VISTA: INICIO
-    =========================================== -->
+
     <main id="inicio" class="page active">
         <section class="hero">
             <div class="hero-content">
@@ -251,9 +243,7 @@
         </section>
     </main>
 
-    <!-- ==========================================
-         VISTA: GALERÍA
-    =========================================== -->
+
     <main id="galeria" class="page">
         <section class="hero-short">
             <div style="position: relative; z-index: 1;">
@@ -304,9 +294,7 @@
         </section>
     </main>
 
-    <!-- ==========================================
-         VISTA: CONTACTO
-    =========================================== -->
+
     <main id="contacto" class="page">
         <section class="contacto-container">
             <div class="contacto-text">
@@ -340,7 +328,6 @@
         </section>
     </main>
 
-    <!-- PIE DE PÁGINA COMÚN -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
@@ -378,7 +365,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPT PARA CAMBIAR DE PÁGINAS -->
+    <!-- Cambiar de paginas-->
     <script>
         function showPage(pageId) {
             // Ocultar todas las páginas
