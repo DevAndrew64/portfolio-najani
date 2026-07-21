@@ -280,6 +280,50 @@
             gap: 20px;
         }
     }
+        .artist-btn {
+            display: inline-block;
+            padding: 8px 18px;
+            background-color: #000;
+            color: #fff !important;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .artist-btn:hover {
+            background-color: var(--gold);
+            color: #fff !important;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Efecto destello (barrido de luz) */
+        .artist-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.4) 50%,
+                rgba(255,255,255,0) 100%
+            );
+            transform: rotate(30deg) translate(-100%, -100%);
+            transition: transform 0.6s ease;
+        }
+
+        .artist-btn:hover::after {
+            transform: rotate(30deg) translate(100%, 100%);
+        }
+        
     </style>
 </head>
 <body>
@@ -409,7 +453,7 @@
                 <div class="text">
                     <h2>S H I N O</h2>
                     <p>Artista digital con una identidad visual única y una gran pasión por la creatividad.</p>
-                    <button class="btn" style="background: #000; border-radius: 5px;">shino_sy</button>
+                    <a href="https://www.instagram.com/shinon_sy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="artist-btn">shino_sy</a>
                 </div>
                 <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/shino_sy.jpg" alt="Shino Art">
             </div>
@@ -418,7 +462,7 @@
                 <div class="text">
                     <h2>ART TAN</h2>
                     <p>Creadora de ilustraciones que transmiten creatividad, emoción y una conexión única con la naturaleza.</p>
-                    <button class="btn" style="background: #000; border-radius: 5px;">art.tan_art</button>
+                    <a href="https://www.instagram.com/arttan_arte?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="artist-btn">shino_sy</a>
                 </div>
                 <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/rana.png" alt="Art Tan">
             </div>
@@ -427,18 +471,25 @@
             <div class="colaboradores-grid">
                 <div class="colab-left reveal">
                     <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/princesa_triste.jpg" alt="Amarillo">
-                    <h4 style="margin-top: 15px; font-size: 1.1rem;">a.m.a.r.i.l.l.o.</h4>
+                    <h4 style="margin-top: 15px; font-size: 1.1rem;">
+                        <a href="https://www.instagram.com/a_m_a_r_i_l_l_a_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="artist-btn">a.m.a.r.i.l.l.o.</a>
+                    </h4>
+                    </h4>
                     <p style="font-size: 0.85rem; color: #555; margin-top: 5px;">Ilustradora que transforma la imaginación en vida en lienzos de color y sensibilidad.</p>
                 </div>
                 <div class="colab-right reveal">
                     <div>
                         <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/emee.png" alt="Eme Arts">
-                        <h4 style="margin-top: 10px;">eme_arts</h4>
+                        <h4 style="margin-top: 10px;">
+                            <a href="https://www.instagram.com/emee_arts/" target="_blank" class="artist-btn">eme_arts</a>
+                        </h4>
                         <p style="font-size: 0.8rem; color: #555;">Diseñador gráfico e ilustrador que transforma creatividad en piezas visuales.</p>
                     </div>
                     <div>
                         <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/robbie.png" alt="Roble Rick">
-                        <h4 style="margin-top: 10px;">roble_rick1</h4>
+                        <h4 style="margin-top: 10px;">
+                            <a href="https://www.instagram.com/robbie_nick1/" target="_blank" class="artist-btn">roble_rick1</a>
+                        </h4>
                         <p style="font-size: 0.8rem; color: #555;">Artista visual que transforma su imaginación en ilustraciones llenas de creatividad.</p>
                     </div>
                 </div>
