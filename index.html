@@ -549,6 +549,22 @@
         document.addEventListener('DOMContentLoaded', () => {
             initScrollAnimations();
         });
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Si baja más de 100px y va hacia abajo, la ocultamos
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                header.classList.add('hidden');
+            } else {
+                // Si va hacia arriba, la mostramos
+                header.classList.remove('hidden');
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Evita errores de rebote en móviles
+        });
     </script>
 </body>
 </html>
