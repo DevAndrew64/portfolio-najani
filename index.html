@@ -224,6 +224,55 @@
             opacity: 1;
             transform: translateY(0);
         }
+        @media (max-width: 768px) {
+
+        header {
+            flex-direction: column;
+            gap: 15px;
+            padding: 15px 5%;
+        }
+
+        nav {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+
+        .hero-content {
+            padding: 20px;
+            margin: 0 20px;
+        }
+
+        .cursive {
+            font-size: 3rem;
+        }
+
+        .artista-destacado,
+        .artist-row,
+        .artist-row:nth-child(even) {
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .clientes-grid,
+        .experiencias-grid,
+        .colaboradores-grid,
+        .contacto-container,
+        form {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .footer-links {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
     </style>
 </head>
 <body>
