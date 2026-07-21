@@ -6,23 +6,51 @@
     <title>Najani - Agencia de Arte</title>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* --- colores y variables --- */
         :root {
             --bg-color: #f9f9f9;
             --text-main: #1a1a1a;
             --accent: #1e293b;
             --gold: #c5a059;
         }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
         
-        /* --- tipografia --- */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            overflow-x: hidden; 
+        }
+        
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .cursive { font-family: 'Alex Brush', cursive; font-size: 4rem; font-weight: normal; margin-bottom: 10px; }
-        .logo { font-family: 'Alex Brush', cursive; font-size: 3rem; text-decoration: none; color: var(--text-main); cursor: pointer; }
         
-
-        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .cursive { 
+            font-family: 'Alex Brush', cursive; 
+            font-size: 4rem; 
+            font-weight: normal; 
+            margin-bottom: 10px; 
+        }
+        
+        .logo { 
+            font-family: 'Alex Brush', cursive; 
+            font-size: 3rem; 
+            text-decoration: none; 
+            color: var(--text-main); 
+            cursor: pointer; 
+        }
+        
+        header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 20px 5%; 
+            background: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+        
         nav { display: flex; gap: 15px; }
 
         .nav-btn, .btn { 
@@ -37,13 +65,24 @@
             text-decoration: none;
             display: inline-block;
         }
-        .nav-btn:hover, .btn:hover { background-color: var(--gold); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3); }
+        
+        .nav-btn:hover, .btn:hover { 
+            background-color: var(--gold); 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3); 
+        }
 
-        /* --- VISTAS (SPA) --- */
-        .page { display: none; opacity: 0; transition: opacity 0.4s ease; }
-        .page.active { display: block; opacity: 1; }
+        .page { 
+            display: none; 
+            opacity: 0; 
+            transition: opacity 0.4s ease; 
+        }
+        
+        .page.active { 
+            display: block; 
+            opacity: 1; 
+        }
 
-        /* --- MARCOS DE ARTE --- */
         .gold-frame {
             border: 15px solid #d4af37;
             border-style: ridge;
@@ -53,19 +92,55 @@
             object-fit: cover;
         }
 
-
         .hero { 
             height: 70vh; 
-            background: url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?q=80&w=1958&auto=format&fit=crop') center/cover; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; position: relative;
+            background-color: #1a1a1a;
+            background-image: url('https://6a5fc09fcfa91e42ab6b98f2.imgix.net/snowboard.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            color: white; 
+            position: relative;
         }
-        .hero::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); }
-        .hero-content { position: relative; z-index: 1; border: 2px solid rgba(255,255,255,0.7); padding: 40px; max-width: 600px; backdrop-filter: blur(5px); }
+        
+        .hero::before { 
+            content: ''; 
+            position: absolute; 
+            top:0; left:0; width:100%; height:100%; 
+            background: rgba(0,0,0,0.4); 
+        }
+        
+        .hero-content { 
+            position: relative; 
+            z-index: 1; 
+            border: 2px solid rgba(255,255,255,0.7); 
+            padding: 40px; 
+            max-width: 600px; 
+            backdrop-filter: blur(5px); 
+        }
+        
         .hero-content p { font-size: 1.1rem; line-height: 1.6; }
 
-        .section-container { padding: 60px 5%; max-width: 1200px; margin: 0 auto; text-align: center; }
+        .section-container { 
+            padding: 60px 5%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            text-align: center; 
+        }
         
-        .galeria-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        .galeria-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 40px; 
+            margin-top: 40px; 
+        }
+        
         .galeria-item img { width: 100%; height: 250px; }
         .galeria-item h3 { margin-top: 15px; font-size: 1.2rem; }
         .galeria-item p { font-size: 0.85rem; color: #555; margin-top: 10px; text-align: left; line-height: 1.4; }
@@ -84,8 +159,22 @@
         .user-info { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: #666; }
         .user-info img { width: 30px; height: 30px; border-radius: 50%; }
 
-
-        .hero-short { height: 40vh; background: url('https://images.unsplash.com/photo-1518998053401-878c73fd6f15?q=80&w=1974&auto=format&fit=crop') center/cover; display: flex; justify-content: center; align-items: center; color: white; text-align: center; position: relative;}
+        .hero-short { 
+            height: 40vh; 
+            background-color: #1a1a1a;
+            background-image: url('https://6a5fc09fcfa91e42ab6b98f2.imgix.net/fondo_galeria.jpeg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            color: white; 
+            text-align: center; 
+            position: relative;
+        }
+        
         .hero-short::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.3); }
         .hero-short h1 { position: relative; z-index: 1; font-size: 3rem; }
         
@@ -101,7 +190,6 @@
         .colab-right { display: flex; flex-direction: column; gap: 30px; }
         .colab-right img { width: 100%; height: 235px; object-fit: cover; border-radius: 8px; }
 
-
         .contacto-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 60px 5%; max-width: 1200px; margin: 0 auto; align-items: start; }
         .contacto-text h1 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 2.5rem; margin-bottom: 20px; }
         .contacto-text h3 { font-family: 'Inter', sans-serif; font-weight: 600; margin-bottom: 10px; }
@@ -116,7 +204,6 @@
         
         .contacto-img img { width: 100%; height: 600px; object-fit: cover; border-radius: 8px; }
 
-
         footer { border-top: 1px solid #eaeaea; padding: 60px 5% 40px; background: #fff; margin-top: 50px; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
         .footer-logo .logo { font-size: 3.5rem; }
@@ -126,10 +213,20 @@
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 10px; font-size: 0.85rem; color: #666; cursor: pointer; transition: 0.2s; }
         .footer-col ul li:hover { color: var(--gold); }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-
 
     <header>
         <div class="logo" onclick="showPage('inicio')">Najani</div>
@@ -140,9 +237,8 @@
         </nav>
     </header>
 
-
     <main id="inicio" class="page active">
-        <section class="hero">
+        <section class="hero reveal">
             <div class="hero-content">
                 <h1 class="cursive">Agencia</h1>
                 <p>Impulsamos tu talento, gestionamos tus creaciones y multiplicamos tus ingresos. Haz que tu pasión sea tu profesión.</p>
@@ -150,19 +246,19 @@
         </section>
 
         <section class="section-container">
-            <h2 class="cursive" style="background: #111; color:#fff; display:inline-block; padding: 0 40px;">Galeria</h2>
+            <h2 class="cursive reveal" style="background: #111; color:#fff; display:inline-block; padding: 0 40px;">Galeria</h2>
             <div class="galeria-grid">
-                <div class="galeria-item">
+                <div class="galeria-item reveal">
                     <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/cayendo_nubes.jpeg" class="gold-frame" alt="Arte">
                     <h3>Cayendo a través de las nubes</h3>
                     <p>Crear no siempre significa hacer bonito; a veces significa atravesar la tormenta.</p>
                 </div>
-                <div class="galeria-item">
+                <div class="galeria-item reveal">
                     <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/retrato_abstract.jpeg" class="gold-frame" alt="Arte">
                     <h3>Autorretrato</h3>
                     <p>Aborda cómo el tiempo y la memoria moldean nuestra percepción de nosotros mismos.</p>
                 </div>
-                <div class="galeria-item">
+                <div class="galeria-item reveal">
                     <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/messi.jpeg" class="gold-frame" alt="Arte">
                     <h3>Kagi X Football Association</h3>
                     <p>Combinando su trazo menudo y su personalidad intrincada con la majestuosidad del deporte.</p>
@@ -170,7 +266,7 @@
             </div>
         </section>
 
-        <section class="section-container">
+        <section class="section-container reveal">
             <div class="artista-destacado">
                 <div class="artista-text">
                     <h2 class="cursive" style="font-size: 3.5rem;">Artista destacado</h2>
@@ -189,14 +285,14 @@
         </section>
 
         <section class="section-container">
-            <h2 class="cursive" style="text-align: left; font-size: 4rem;">Clientes</h2>
+            <h2 class="cursive reveal" style="text-align: left; font-size: 4rem;">Clientes</h2>
             <div class="clientes-grid">
-                <div class="cliente-card">
+                <div class="cliente-card reveal">
                     <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/collage_1.jpeg" alt="Diseño Gráfico">
                     <h4 style="margin-bottom: 10px;">Diseñadores gráficos y producción creativa</h4>
                     <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Toma una idea, un mensaje o un concepto abstracto y lo transforma en un objeto visual que el público pueda entender, recordar y sentir.</p>
                 </div>
-                <div class="cliente-card">
+                <div class="cliente-card reveal">
                     <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/collage_2.jpeg" alt="Ilustradores">
                     <h4 style="margin-bottom: 10px;">Ilustradores</h4>
                     <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Un ilustrador es un artista que traduce ideas, textos, emociones o conceptos en imágenes utilizando un estilo artístico propio.</p>
@@ -205,9 +301,9 @@
         </section>
 
         <section class="section-container">
-            <h2 class="cursive" style="text-align: left;">experiencias</h2>
+            <h2 class="cursive reveal" style="text-align: left;">experiencias</h2>
             <div class="experiencias-grid">
-                <div class="exp-card">
+                <div class="exp-card reveal">
                     <h4>«excelente pagina»</h4>
                     <div class="user-info">
                         <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1780&auto=format&fit=crop" alt="User">
@@ -216,7 +312,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="exp-card">
+                <div class="exp-card reveal">
                     <h4>«me ayudo a conseguir muchos más seguidores.»</h4>
                     <div class="user-info">
                         <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=1780&auto=format&fit=crop" alt="User">
@@ -225,7 +321,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="exp-card">
+                <div class="exp-card reveal">
                     <h4>«me ayudo a vender obras estancadas.»</h4>
                     <div class="user-info">
                         <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop" alt="User">
@@ -237,7 +333,7 @@
             </div>
         </section>
 
-        <section class="section-container" style="display: flex; justify-content: space-between; align-items: center; background: #f4f4f4; padding: 30px; margin-top: 50px;">
+        <section class="section-container reveal" style="display: flex; justify-content: space-between; align-items: center; background: #f4f4f4; padding: 30px; margin-top: 50px;">
             <h2 style="font-family: 'Inter', sans-serif; font-weight: 700;">Contactanos</h2>
             <button class="btn" style="background: #e2e2e2; color: #000;">asistente personal</button>
         </section>
@@ -245,7 +341,7 @@
 
 
     <main id="galeria" class="page">
-        <section class="hero-short">
+        <section class="hero-short reveal">
             <div style="position: relative; z-index: 1;">
                 <h1 class="cursive" style="font-size: 5rem; margin-bottom: 0;">Comunidad Artistica</h1>
                 <p style="font-size: 1.1rem; letter-spacing: 1px;">Satisfacción con la descripción de tu sitio de compras</p>
@@ -253,7 +349,7 @@
         </section>
 
         <section class="section-container">
-            <div class="artist-row">
+            <div class="artist-row reveal">
                 <div class="text">
                     <h2>S H I N O</h2>
                     <p>Artista digital con una identidad visual única y una gran pasión por la creatividad.</p>
@@ -262,7 +358,7 @@
                 <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/shino_sy.jpg" alt="Shino Art">
             </div>
 
-            <div class="artist-row">
+            <div class="artist-row reveal">
                 <div class="text">
                     <h2>ART TAN</h2>
                     <p>Creadora de ilustraciones que transmiten creatividad, emoción y una conexión única con la naturaleza.</p>
@@ -271,14 +367,14 @@
                 <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/rana.png" alt="Art Tan">
             </div>
 
-            <h2 style="text-align: left; font-family: 'Inter', sans-serif; font-weight: 700; margin-top: 60px;">Diferentes colaboradores</h2>
+            <h2 class="reveal" style="text-align: left; font-family: 'Inter', sans-serif; font-weight: 700; margin-top: 60px;">Diferentes colaboradores</h2>
             <div class="colaboradores-grid">
-                <div class="colab-left">
+                <div class="colab-left reveal">
                     <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/princesa_triste.jpg" alt="Amarillo">
                     <h4 style="margin-top: 15px; font-size: 1.1rem;">a.m.a.r.i.l.l.o.</h4>
                     <p style="font-size: 0.85rem; color: #555; margin-top: 5px;">Ilustradora que transforma la imaginación en vida en lienzos de color y sensibilidad.</p>
                 </div>
-                <div class="colab-right">
+                <div class="colab-right reveal">
                     <div>
                         <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/emee.png" alt="Eme Arts">
                         <h4 style="margin-top: 10px;">eme_arts</h4>
@@ -294,9 +390,8 @@
         </section>
     </main>
 
-
     <main id="contacto" class="page">
-        <section class="contacto-container">
+        <section class="contacto-container reveal">
             <div class="contacto-text">
                 <h1>Contactanos !</h1>
                 <h3>Tu arte merece ser visto.</h3>
@@ -323,7 +418,7 @@
                 </form>
             </div>
             <div class="contacto-img">
-                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop" alt="Arte Abstracto">
+                <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/calavera_arr.jpeg" alt="Arte Abstracto">
             </div>
         </section>
     </main>
@@ -365,18 +460,39 @@
         </div>
     </footer>
 
-    <!-- Cambiar de paginas-->
     <script>
         function showPage(pageId) {
-            // Ocultar todas las páginas
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
-            // Mostrar la página solicitada
             document.getElementById(pageId).classList.add('active');
-            // Hacer scroll hacia arriba
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            setTimeout(() => {
+                initScrollAnimations();
+            }, 50);
         }
+
+        function initScrollAnimations() {
+            const reveals = document.querySelectorAll('.page.active .reveal');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(reveal => {
+                reveal.classList.remove('active');
+                observer.observe(reveal);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initScrollAnimations();
+        });
     </script>
 </body>
 </html>
