@@ -844,6 +844,14 @@
         }
         
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function(){
+            // Reemplaza con tu Public Key real de EmailJS
+            emailjs.init("LgNHS-amouxfY-fm0");
+        })();
+    </script>
 </head>
 <body>
 
@@ -1199,6 +1207,17 @@
                             <input type="password" id="card-cvc" placeholder="123" maxlength="4" required>
                         </div>
 
+                        <!-- NUEVOS CAMPOS DE CONTACTO -->
+                        <div class="form-group full-width">
+                            <label>Correo electrónico (Para enviar la factura)</label>
+                            <input type="email" id="checkout-email" placeholder="ejemplo@correo.com" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Número telefónico</label>
+                            <input type="tel" id="checkout-phone" placeholder="+57 300 000 0000" required>
+                        </div>
+
                         <button type="submit" id="pay-btn" class="btn-pay full-width">Pagar Ahora</button>
                     </form>
                 </div>
@@ -1482,24 +1501,90 @@
             event.preventDefault();
 
             const payBtn = document.getElementById('pay-btn');
-            payBtn.innerText = "Procesando pago seguro...";
+            const userEmail = document.getElementById('checkout-email').value;
+            const userPhone = document.getElementById('checkout-phone').value;
+            const userName = document.getElementById('card-name').value;
+
+            payBtn.innerText = "Procesando pago y enviando factura...";
             payBtn.style.opacity = "0.7";
             payBtn.disabled = true;
 
-            // simular latencia de red de 2 segundos Stripe
+            // En lugar de formatear el total aquí, calculamos el subtotal numérico
+            // para poder hacer las operaciones matemáticas de impuestos y envíos más adelante.
+            let subtotal = 0;
+            cart.forEach(item => { subtotal += item.price * item.quantity; });
+
+            // Simular el tiempo de validación del banco (2 segundos)
             setTimeout(() => {
-                cart = [];
-                updateCartUI();
-
-                // cambiar la vista al estado de éxito
-                document.getElementById('checkout-content').style.display = 'none';
-                document.getElementById('success-screen').style.display = 'block';
-
-                // restablecer el botón para futuras compras
-                payBtn.innerText = "Pagar Ahora";
-                payBtn.style.opacity = "1";
-                payBtn.disabled = false;
+                // Enviar el correo electrónico real pasando el subtotal crudo
+                enviarFacturaReal(userEmail, userName, userPhone, subtotal, payBtn);
             }, 2000);
+        }
+
+        function enviarFacturaReal(email, name, phone, subtotal, btnElement) {
+            // Generar un ID de orden dinámico
+            const orderId = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+
+            // mapear el carrito al formato de array de objetos que espera EmailJS {{#orders}} ... {{/orders}}
+            const orderItems = cart.map(item => {
+                return {
+                    name: item.name,
+                    units: item.quantity,
+                    // se formatea el número sin el símbolo '$' ya que está quemado en la plantilla
+                    price: (item.price * item.quantity).toLocaleString('es-ES', { minimumFractionDigits: 2 })
+                };
+            });
+
+            // Cálculos de impuestos (ej. 19% IVA) y coste de envío
+            const shippingCost = 15000; // Puedes volver esto dinámico después
+            const taxCost = subtotal * 0.19; 
+            const grandTotal = subtotal + taxCost + shippingCost;
+
+            // Construccion del objeto de variables exactamente como lo pide la plantilla
+            const templateParams = {
+                order_id: orderId,
+                orders: orderItems,
+                cost: {
+                    shipping: shippingCost.toLocaleString('es-ES', { minimumFractionDigits: 2 }),
+                    tax: taxCost.toLocaleString('es-ES', { minimumFractionDigits: 2 }),
+                    total: grandTotal.toLocaleString('es-ES', { minimumFractionDigits: 2 })
+                },
+                email: email, // Captura el tag inferior {{email}} de la imagen
+                
+                // Estos parámetros adicionales no están en la captura, pero es buena práctica 
+                // dejarlos por si decides incluirlos en el Asunto del correo o usar la información
+                to_name: name,
+                user_phone: phone
+            };
+
+            emailjs.send('service_ryj3zpn', 'template_9sv9i6p', templateParams)
+                .then(function(response) {
+                    console.log('CORREO ENVIADO CON ÉXITO!', response.status, response.text);
+                    
+                    cart = [];
+                    updateCartUI();
+
+                    // Cambiar la vista al estado de éxito
+                    document.getElementById('checkout-content').style.display = 'none';
+                    document.getElementById('success-screen').style.display = 'block';
+
+                    // Restablecer el formulario
+                    btnElement.innerText = "Pagar Ahora";
+                    btnElement.style.opacity = "1";
+                    btnElement.disabled = false;
+                    document.querySelector('.payment-form').reset();
+                    updateCardPreview(); 
+                    
+                }, function(error) {
+                    console.error('ERROR AL ENVIAR CORREO...', error);
+                    alert("Hubo un problema al enviar la factura. Por favor, intenta nuevamente.");
+                    
+                     // en caso de error se restablece
+                     
+                    btnElement.innerText = "Pagar Ahora";
+                    btnElement.style.opacity = "1";
+                    btnElement.disabled = false;
+                });
         }
     </script>
 </body>
