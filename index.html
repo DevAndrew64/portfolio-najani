@@ -323,6 +323,324 @@
         .artist-btn:hover::after {
             transform: rotate(30deg) translate(100%, 100%);
         }
+        .floating-cart-btn {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 0 10px 10px 0;
+            padding: 15px 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+            z-index: 999;
+            transition: background 0.3s ease;
+        }
+
+        .floating-cart-btn:hover {
+            background: #a88544;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: #ff3b30;
+            color: white;
+            font-size: 0.8rem;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Panel lateral del carrito (Izquierda) */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            left: -400px; /* Oculto por defecto */
+            width: 350px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            left: 0; /* Mostrar carrito */
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 15px;
+        }
+
+        .cart-header h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+        }
+
+        .cart-close {
+            cursor: pointer;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            transition: color 0.3s;
+        }
+
+        .cart-close:hover {
+            color: var(--gold);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 15px;
+        }
+
+        .cart-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cart-item-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .cart-footer {
+            border-top: 2px solid var(--bg-color);
+            padding-top: 20px;
+            margin-top: auto;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 15px;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: color 0.2s ease, transform 0.2s ease;
+            line-height: 1;
+            margin-left: auto; /* Empuja el botón a la derecha */
+        }
+
+        .cart-item-remove:hover {
+            color: #ff3b30;
+            transform: scale(1.15);
+        }
+
+        .btn-checkout {
+            width: 100%;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-checkout:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* Cuadrícula de la Tienda de Arte */
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .store-item {
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #eaeaea;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .store-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .store-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .store-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .store-item p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            height: 60px; /* Mantiene la altura uniforme */
+            overflow: hidden;
+        }
+
+        .store-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .btn-add {
+            background: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--text-main);
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .btn-add:hover {
+            background: var(--text-main);
+            color: #fff;
+        }
+
+                /* contenedor princi */
+        .section-container { 
+            padding: 60px 4%; 
+            max-width: 1400px; /* Aumentado de 1200px a 1400px */
+            margin: 0 auto; 
+            text-align: center; 
+        }
+
+        /* Cuadrícula responsiva con tarjetas más anchas */
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); /* Tarjetas más anchas */
+            gap: 35px;
+            margin-top: 40px;
+        }
+
+        /* Tarjeta de artículo con estructura Flexbox uniforme */
+        .store-item {
+            background: #fff;
+            padding: 25px;
+            border: 1px solid #eaeaea;
+            text-align: center;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Mantiene el botón al fondo siempre alineado */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .store-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+        }
+
+        /* Control estricto de la imagen para evitar que rompa el layout */
+        .store-item img {
+            width: 100%;
+            height: 380px; /* Altura significativamente mayor */
+            object-fit: cover; /* Recorta y escala sin deformar */
+            object-position: center;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background-color: #f0f0f0; /* Color de fondo mientras carga */
+        }
+
+        /* Tipografía y espaciado mejorados */
+        .store-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .store-item p {
+            font-size: 0.92rem;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            min-height: 48px;
+        }
+
+        .store-price {
+            font-size: 1.35rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
         
     </style>
 </head>
@@ -333,6 +651,7 @@
         <nav>
             <button class="nav-btn" onclick="showPage('inicio')">Inicio</button>
             <button class="nav-btn" onclick="showPage('galeria')">Galería</button>
+            <button class="nav-btn" onclick="showPage('arte')">Arte</button>
             <button class="nav-btn" onclick="showPage('contacto')">Contacto</button>
         </nav>
     </header>
@@ -497,6 +816,129 @@
         </section>
     </main>
 
+    <main id="arte" class="page">
+        <section class="hero-short reveal">
+            <div style="position: relative; z-index: 1;">
+                <h1 class="cursive" style="font-size: 5rem; margin-bottom: 0;">Colección Exclusiva</h1>
+                <p style="font-size: 1.1rem; letter-spacing: 1px;">Adquiere obras maestras originales de nuestros artistas</p>
+            </div>
+        </section>
+
+        <section class="section-container">
+            <div class="store-grid">
+                
+                <!-- ARTÍCULO 1 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/alissia.png" class="gold-frame" alt="alissia">
+                    <h3>Alissia</h3>
+                    <p>Contemporaneo</p>
+                    <div class="store-price">$180.000</div>
+                    <button class="btn-add" onclick="addToCart(1, 'Alissia', 180000, 'https://6a849429ca5c68e1f896d950.imgix.net/alissia.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 2 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/masalladelsentimiento.png" class="gold-frame" alt="masalladelsentimiento">
+                    <h3>Mas allá del Sentimiento</h3>
+                    <p>Melancolía</p>
+                    <div class="store-price">$140.000</div>
+                    <button class="btn-add" onclick="addToCart(2, 'Mas allá del Sentimiento', 140000, 'https://6a849429ca5c68e1f896d950.imgix.net/masalladelsentimiento.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 3 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/bella%20signora.png" class="gold-frame" alt="bella_signora">
+                    <h3>Bella Signora</h3>
+                    <p>Vanguardista</p>
+                    <div class="store-price">$70.000</div>
+                    <button class="btn-add" onclick="addToCart(3, 'Bella Signora', 70000, 'https://6a849429ca5c68e1f896d950.imgix.net/bella%20signora.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 4 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/ParisoEterno.png" class="gold-frame" alt="ParaisoEterno">
+                    <h3>Paraiso Eterno</h3>
+                    <p>Encuentro</p>
+                    <div class="store-price">$120.000</div>
+                    <button class="btn-add" onclick="addToCart(4, 'Paraiso Eterno', 120000, 'https://6a849429ca5c68e1f896d950.imgix.net/ParisoEterno.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 5 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/realidadAlterada.png" class="gold-frame" alt="realidadAlterada">
+                    <h3>Realidad Alterada</h3>
+                    <p>Paralelismo</p>
+                    <div class="store-price">$120.000</div>
+                    <button class="btn-add" onclick="addToCart(5, 'Realidad Alterada', 120000, 'https://6a849429ca5c68e1f896d950.imgix.net/realidadAlterada.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 6 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/PolvoYVeneno.png" class="gold-frame" alt="PolvoYVeneno">
+                    <h3>Polvo y Veneno</h3>
+                    <p>Fantasía</p>
+                    <div class="store-price">$100.000</div>
+                    <button class="btn-add" onclick="addToCart(6, 'Polvo y Veneno', 100000, 'https://6a849429ca5c68e1f896d950.imgix.net/PolvoYVeneno.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 7 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/Calcifer.png" class="gold-frame" alt="Calcifer">
+                    <h3>Calcifer</h3>
+                    <p>Calcomanias</p>
+                    <div class="store-price">$40.000</div>
+                    <button class="btn-add" onclick="addToCart(7, 'Calcifer', 40000, 'https://6a849429ca5c68e1f896d950.imgix.net/Calcifer.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 8 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/lilith.png" class="gold-frame" alt="lilith">
+                    <h3>Lilith</h3>
+                    <p>Retrato</p>
+                    <div class="store-price">$145.000</div>
+                    <button class="btn-add" onclick="addToCart(8, 'Lilith', 145000, 'https://6a849429ca5c68e1f896d950.imgix.net/lilith.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 9 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/Geisha.png" class="gold-frame" alt="Geisha">
+                    <h3>Geisha Kintsugi</h3>
+                    <p>Oriental</p>
+                    <div class="store-price">$80.000</div>
+                    <button class="btn-add" onclick="addToCart(9, 'Geisha Kintsugi', 80000, 'https://6a849429ca5c68e1f896d950.imgix.net/Geisha.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 10 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/AliceIn.png" class="gold-frame" alt="AliceIn">
+                    <h3>Alice In The Wonderlands</h3>
+                    <p>Libro Portada</p>
+                    <div class="store-price">$140.000</div>
+                    <button class="btn-add" onclick="addToCart(10, 'Alice In The Wonderlands', 140000, 'https://6a849429ca5c68e1f896d950.imgix.net/AliceIn.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 11 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/BlackStar.png" class="gold-frame" alt="BlackStar">
+                    <h3>Black Star</h3>
+                    <p>Junji Ito Core</p>
+                    <div class="store-price">$100.000</div>
+                    <button class="btn-add" onclick="addToCart(11, 'Black Star', 100000, 'https://6a849429ca5c68e1f896d950.imgix.net/BlackStar.png')">Comprar ahora</button>
+                </div>
+
+                <!-- ARTÍCULO 12 -->
+                <div class="store-item reveal">
+                    <img src="https://6a849429ca5c68e1f896d950.imgix.net/Finn.png" class="gold-frame" alt="Finn">
+                    <h3>Finn</h3>
+                    <p>Guardian</p>
+                    <div class="store-price">$50.000</div>
+                    <button class="btn-add" onclick="addToCart(12, 'Finn', 50000, 'https://6a849429ca5c68e1f896d950.imgix.net/Finn.png')">Comprar ahora</button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
     <main id="contacto" class="page">
         <section class="contacto-container reveal">
             <div class="contacto-text">
@@ -566,6 +1008,29 @@
             </div>
         </div>
     </footer>
+        <!-- Botón lateral izquierdo -->
+    <button class="floating-cart-btn" onclick="toggleCart()">
+        🛒 <span class="cart-badge" id="cart-badge">0</span>
+    </button>
+
+    <!-- Panel del Carrito -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Tu Carrito</h2>
+            <button class="cart-close" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Los artículos se inyectarán aquí dinámicamente -->
+            <p style="text-align: center; color: #666; margin-top: 20px;">El carrito está vacío.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Finalizar compra</button>
+        </div>
+    </div>
 
     <script>
         function showPage(pageId) {
@@ -616,6 +1081,85 @@
             
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Evita errores de rebote en móviles
         });
+        let cart = [];
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Agregar producto al array y actualizar UI
+        function addToCart(id, name, price, image) {
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id, name, price, image, quantity: 1 }); // Si no exite el producto, lo crea - ulti
+            }
+            
+            updateCartUI();
+            
+            const sidebar = document.getElementById('cart-sidebar');
+            if(!sidebar.classList.contains('open')) {
+                toggleCart(); 
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        // Re-renderizar el HTML del carrito basándose en el estado del array
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+            const cartBadge = document.getElementById('cart-badge');
+            
+            cartItemsContainer.innerHTML = '';
+            
+            let total = 0;
+            let count = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: #666; margin-top: 20px;">El carrito está vacío.</p>';
+            } else {
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                    count += item.quantity;
+
+                    cartItemsContainer.innerHTML += `
+                        <div class="cart-item">
+                            <img src="${item.image}" alt="${item.name}">
+                            <div class="cart-item-details">
+                                <div class="cart-item-title">${item.name}</div>
+                                <div class="cart-item-price">$${item.price.toLocaleString('es-ES', { minimumFractionDigits: 2 })} × ${item.quantity}</div>
+                            </div>
+                            <button class="cart-item-remove" onclick="removeFromCart(${item.id})" title="Quitar artículo">&times;</button>
+                        </div>
+                    `;
+                });
+            }
+
+            cartTotalPrice.innerText = `$${total.toLocaleString('es-ES', { minimumFractionDigits: 2 })}`;
+            cartBadge.innerText = count;
+        }
+
+        // Simular Pasarela de Pago
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Tu carrito está vacío. Agrega algunas obras de arte primero.");
+                return;
+            }
+            
+            alert("¡Simulacro exitoso! Redirigiendo a la pasarela de pago segura de Najani...");
+            
+            // Limpiar carrito "
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
     </script>
 </body>
 </html>
