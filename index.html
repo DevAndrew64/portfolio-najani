@@ -1444,6 +1444,31 @@
             document.getElementById('card-num-preview').innerText = numInput.trim() !== '' ? numInput : '•••• •••• •••• ••••';
             document.getElementById('card-exp-preview').innerText = expInput.trim() !== '' ? expInput : 'MM/AA';
         }
+
+        // pago con retardo - parte de la simu
+        function processPayment(event) {
+            event.preventDefault();
+
+            const payBtn = document.getElementById('pay-btn');
+            payBtn.innerText = "Procesando pago seguro...";
+            payBtn.style.opacity = "0.7";
+            payBtn.disabled = true;
+
+            // simular latencia de red de 2 segundos Stripe
+            setTimeout(() => {
+                cart = [];
+                updateCartUI();
+
+                // cambiar la vista al estado de éxito
+                document.getElementById('checkout-content').style.display = 'none';
+                document.getElementById('success-screen').style.display = 'block';
+
+                // restablecer el botón para futuras compras
+                payBtn.innerText = "Pagar Ahora";
+                payBtn.style.opacity = "1";
+                payBtn.disabled = false;
+            }, 2000);
+        }
     </script>
 </body>
 </html>
