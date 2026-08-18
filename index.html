@@ -60,7 +60,22 @@
         
         nav { display: flex; gap: 15px; }
 
-        .nav-btn, .btn { 
+        .nav-btn {
+            position: relative;
+            padding: 8px 12px;
+            background-color: transparent;
+            color: var(--text-main);
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn { 
             padding: 10px 24px; 
             background-color: var(--accent); 
             color: white; 
@@ -73,7 +88,28 @@
             display: inline-block;
         }
         
-        .nav-btn:hover, .btn:hover { 
+        .nav-btn:hover {
+            color: var(--gold);
+            background-color: transparent;
+        }
+
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--gold);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform: translateX(-50%);
+        }
+        
+        .nav-btn:hover::after {
+            width: 80%;
+        }
+
+        .btn:hover { 
             background-color: var(--gold); 
             transform: translateY(-2px); 
             box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3); 
@@ -1109,16 +1145,15 @@
         <section class="hero-short reveal">
             <div style="position: relative; z-index: 1;">
                 <h1 class="cursive" style="font-size: 5rem; margin-bottom: 0;">Pasarela de Pago</h1>
-                <p style="font-size: 1.1rem; letter-spacing: 1px;">Transacción simulada 100% segura</p>
+                <p style="font-size: 1.1rem; letter-spacing: 1px;">Transacción 100% segura en Stripe</p>
             </div>
         </section>
 
         <div class="section-container">
             
-            <!-- Formulario y Resumen -->
             <div id="checkout-content" class="checkout-container reveal">
                 
-                <!-- Resumen de la Orden (Izquierda/Arriba) -->
+
                 <div class="checkout-card">
                     <h2>Resumen de Tu Compra</h2>
                     <div class="summary-items" id="summary-items">
@@ -1130,11 +1165,10 @@
                     </div>
                 </div>
 
-                <!-- Formulario de Tarjeta Débito/Crédito (Derecha/Abajo) -->
                 <div class="checkout-card">
                     <h2>Detalles de Pago</h2>
                     
-                    <!-- Tarjeta gráfica interactiva -->
+                    <!-- tarjeta gráfica interactiva -->
                     <div class="credit-card-preview">
                         <div class="card-chip"></div>
                         <div class="card-number-display" id="card-num-preview">•••• •••• •••• ••••</div>
@@ -1427,11 +1461,9 @@
 
             summaryTotal.innerText = `$${total.toLocaleString('es-ES', { minimumFractionDigits: 2 })}`;
 
-            // Restablecer vistas si se hizo una compra previa
             document.getElementById('checkout-content').style.display = 'grid';
             document.getElementById('success-screen').style.display = 'none';
 
-            // Navegar a la página de pasarela
             showPage('pasarela');
         }
 
