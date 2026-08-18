@@ -842,6 +842,175 @@
             color: #22c55e;
             margin-bottom: 15px;
         }
+
+        /* ===== Asistente Geisha (simulado) ===== */
+        .geisha-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), #a88544);
+            color: #fff;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .geisha-btn:hover { transform: scale(1.08); }
+
+        .geisha-panel {
+            position: fixed;
+            bottom: 95px;
+            right: 25px;
+            width: 320px;
+            max-height: 440px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .geisha-panel.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .geisha-header {
+            background: var(--accent);
+            color: #fff;
+            padding: 15px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .geisha-header h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .geisha-status { font-size: 0.65rem; color: #86e08a; font-weight: 400; }
+
+        .geisha-close {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .geisha-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #faf9f7;
+            max-height: 300px;
+        }
+
+        .geisha-msg {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .geisha-msg.bot {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            align-self: flex-start;
+            border-bottom-left-radius: 3px;
+        }
+
+        .geisha-msg.user {
+            background: var(--accent);
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 3px;
+        }
+
+        .geisha-typing {
+            font-size: 0.75rem;
+            color: #999;
+            padding-left: 5px;
+            font-style: italic;
+        }
+
+        .geisha-input-area {
+            display: flex;
+            border-top: 1px solid #eaeaea;
+            padding: 10px;
+            gap: 8px;
+        }
+
+        .geisha-input-area input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .geisha-input-area input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .geisha-send-btn {
+            background: var(--gold);
+            border: none;
+            color: #fff;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            flex-shrink: 0;
+        }
+
+        .geisha-send-btn:hover { background: #a88544; }
+
+        @media (max-width: 480px) {
+            .geisha-panel {
+                width: 90vw;
+                right: 5vw;
+                bottom: 90px;
+                max-height: 60vh;
+            }
+            .geisha-btn {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
         
     </style>
 
@@ -1328,6 +1497,23 @@
         </div>
     </div>
 
+    <!-- Botón flotante Asistente IA (simulado) -->
+    <button class="geisha-btn" onclick="toggleGeisha()" title="Geisha, tu asistente">🌸</button>
+
+    <div id="geisha-panel" class="geisha-panel">
+        <div class="geisha-header">
+            <h3>🌸 Geisha <span class="geisha-status">● en línea</span></h3>
+            <button class="geisha-close" onclick="toggleGeisha()">&times;</button>
+        </div>
+        <div class="geisha-messages" id="geisha-messages">
+            <div class="geisha-msg bot">¡Hola! Soy Geisha, tu asistente virtual de Najani. ¿En qué puedo ayudarte hoy? 🎨</div>
+        </div>
+        <div class="geisha-input-area">
+            <input type="text" id="geisha-input" placeholder="Escribe tu mensaje..." onkeypress="if(event.key==='Enter') sendGeishaMessage()">
+            <button class="geisha-send-btn" onclick="sendGeishaMessage()">➤</button>
+        </div>
+    </div>
+
     <script>
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
@@ -1575,6 +1761,77 @@
                     btnElement.style.opacity = "1";
                     btnElement.disabled = false;
                 });
+        }
+
+        const geishaResponses = {
+            saludo: ["¡Hola de nuevo! ¿Cómo puedo ayudarte?", "¡Bienvenido a Najani! Cuéntame qué buscas."],
+            precio: ["Nuestras obras van desde $40.000 hasta $180.000 aprox. Puedes verlas todas en la sección Arte.", "Los precios varían según la obra. Echa un vistazo a nuestra colección en 'Arte'."],
+            envio: ["Los envíos tienen un costo simulado de $15.000 y se calculan en la pasarela de pago.", "El costo de envío se muestra automáticamente en el resumen de tu compra."],
+            pago: ["Puedes pagar de forma simulada con tarjeta desde el carrito, dando clic en 'Finalizar compra'.", "El proceso de pago es 100% simulado, ¡no te preocupes por tu tarjeta real!"],
+            artista: ["Contamos con varios artistas destacados, puedes conocerlos en la sección Galería.", "Cada obra tiene un artista detrás con su propio estilo. Revisa la Galería para más info."],
+            gracias: ["¡Con gusto! Estoy aquí si necesitas algo más. 🌸", "¡Un placer ayudarte! 🎨"],
+            despedida: ["¡Hasta pronto! Vuelve cuando quieras. 🌸", "¡Nos vemos! Que tengas un lindo día."],
+            default: [
+                "Entiendo. ¿Podrías darme un poco más de detalle sobre lo que buscas?",
+                "Interesante. Te recomiendo revisar nuestra sección de Arte para más opciones.",
+                "Estoy aquí para ayudarte con la galería, precios, envíos o el proceso de pago. ¿Qué necesitas?",
+                "Por ahora soy un asistente de demostración, ¡pero pronto tendré más funciones! 🌸"
+            ]
+        };
+
+        function toggleGeisha() {
+            const panel = document.getElementById('geisha-panel');
+            panel.classList.toggle('open');
+            if (panel.classList.contains('open')) {
+                document.getElementById('geisha-input').focus();
+            }
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.innerText = str;
+            return div.innerHTML;
+        }
+
+        function getGeishaReply(text) {
+            const msg = text.toLowerCase();
+            let category = 'default';
+
+            if (/hola|buenas|hey/.test(msg)) category = 'saludo';
+            else if (/precio|cuesta|valor/.test(msg)) category = 'precio';
+            else if (/env[ií]o|domicilio|entrega/.test(msg)) category = 'envio';
+            else if (/pago|tarjeta|pagar|comprar/.test(msg)) category = 'pago';
+            else if (/artista|autor|quien pinto/.test(msg)) category = 'artista';
+            else if (/gracias/.test(msg)) category = 'gracias';
+            else if (/chao|adios|adiós|hasta luego/.test(msg)) category = 'despedida';
+
+            const options = geishaResponses[category];
+            return options[Math.floor(Math.random() * options.length)];
+        }
+
+        function sendGeishaMessage() {
+            const input = document.getElementById('geisha-input');
+            const text = input.value.trim();
+            if (text === '') return;
+
+            const messagesContainer = document.getElementById('geisha-messages');
+
+            messagesContainer.innerHTML += `<div class="geisha-msg user">${escapeHtml(text)}</div>`;
+            input.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            const typingId = 'geisha-typing-' + Date.now();
+            messagesContainer.innerHTML += `<div class="geisha-typing" id="${typingId}">Geisha está escribiendo...</div>`;
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            setTimeout(() => {
+                const typingEl = document.getElementById(typingId);
+                if (typingEl) typingEl.remove();
+
+                const reply = getGeishaReply(text);
+                messagesContainer.innerHTML += `<div class="geisha-msg bot">${reply}</div>`;
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 900 + Math.random() * 700);
         }
     </script>
 </body>
