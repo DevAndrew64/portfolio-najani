@@ -1557,7 +1557,7 @@
                 user_phone: phone
             };
 
-            emailjs.send('service_ryj3zpn', 'template_9sv9i6p', templateParams)
+            emailjs.send('service_ryj3zpn', 'template_8qebiye', templateParams)
                 .then(function(response) {
                     console.log('CORREO ENVIADO CON ÉXITO!', response.status, response.text);
                     
@@ -1580,7 +1580,7 @@
                     alert("Hubo un problema al enviar la factura. Por favor, intenta nuevamente.");
                     
                      // en caso de error se restablece
-                     
+
                     btnElement.innerText = "Pagar Ahora";
                     btnElement.style.opacity = "1";
                     btnElement.disabled = false;
