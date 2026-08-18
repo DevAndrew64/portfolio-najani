@@ -1434,6 +1434,16 @@
             // Navegar a la página de pasarela
             showPage('pasarela');
         }
+
+        function updateCardPreview() {
+            const nameInput = document.getElementById('card-name').value;
+            const numInput = document.getElementById('card-number').value;
+            const expInput = document.getElementById('card-exp').value;
+
+            document.getElementById('card-name-preview').innerText = nameInput.trim() !== '' ? nameInput : 'NOMBRE TITULAR';
+            document.getElementById('card-num-preview').innerText = numInput.trim() !== '' ? numInput : '•••• •••• •••• ••••';
+            document.getElementById('card-exp-preview').innerText = expInput.trim() !== '' ? expInput : 'MM/AA';
+        }
     </script>
 </body>
 </html>
