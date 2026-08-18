@@ -1104,6 +1104,84 @@
         </section>
     </main>
 
+    <!-- PÁGINA: PASARELA DE PAGO -->
+    <main id="pasarela" class="page">
+        <section class="hero-short reveal">
+            <div style="position: relative; z-index: 1;">
+                <h1 class="cursive" style="font-size: 5rem; margin-bottom: 0;">Pasarela de Pago</h1>
+                <p style="font-size: 1.1rem; letter-spacing: 1px;">Transacción simulada 100% segura</p>
+            </div>
+        </section>
+
+        <div class="section-container">
+            
+            <!-- Formulario y Resumen -->
+            <div id="checkout-content" class="checkout-container reveal">
+                
+                <!-- Resumen de la Orden (Izquierda/Arriba) -->
+                <div class="checkout-card">
+                    <h2>Resumen de Tu Compra</h2>
+                    <div class="summary-items" id="summary-items">
+                        <!-- Inyección dinámica con JS -->
+                    </div>
+                    <div class="summary-total">
+                        <span>Total a Pagar:</span>
+                        <span id="summary-total-price">$0.00</span>
+                    </div>
+                </div>
+
+                <!-- Formulario de Tarjeta Débito/Crédito (Derecha/Abajo) -->
+                <div class="checkout-card">
+                    <h2>Detalles de Pago</h2>
+                    
+                    <!-- Tarjeta gráfica interactiva -->
+                    <div class="credit-card-preview">
+                        <div class="card-chip"></div>
+                        <div class="card-number-display" id="card-num-preview">•••• •••• •••• ••••</div>
+                        <div class="card-details-display">
+                            <span id="card-name-preview">NOMBRE TITULAR</span>
+                            <span id="card-exp-preview">MM/AA</span>
+                        </div>
+                    </div>
+
+                    <form class="payment-form" onsubmit="processPayment(event)">
+                        <div class="form-group full-width">
+                            <label>Nombre en la tarjeta</label>
+                            <input type="text" id="card-name" placeholder="Ej. Juan Pérez" required oninput="updateCardPreview()">
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label>Número de tarjeta</label>
+                            <input type="text" id="card-number" placeholder="4500 0000 0000 0000" maxlength="19" required oninput="updateCardPreview()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Fecha de expiración</label>
+                            <input type="text" id="card-exp" placeholder="MM/AA" maxlength="5" required oninput="updateCardPreview()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>CVC / CVV</label>
+                            <input type="password" id="card-cvc" placeholder="123" maxlength="4" required>
+                        </div>
+
+                        <button type="submit" id="pay-btn" class="btn-pay full-width">Pagar Ahora</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Confirmación de Compra Exitosa -->
+            <div id="success-screen" class="checkout-card success-message reveal">
+                <div class="success-icon">✓</div>
+                <h2 style="font-size: 2rem; border: none;">¡Pago Realizado con Éxito!</h2>
+                <p style="color: #555; margin-bottom: 25px;">Hemos procesado tu pedido simulado. Gracias por apoyar el arte en Najani.</p>
+                <button class="btn" onclick="showPage('inicio')">Volver al Inicio</button>
+            </div>
+
+        </div>
+    </main>
+
     <main id="contacto" class="page">
         <section class="contacto-container reveal">
             <div class="contacto-text">
