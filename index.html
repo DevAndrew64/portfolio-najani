@@ -1389,19 +1389,50 @@
             cartBadge.innerText = count;
         }
 
-        // Simular Pasarela de Pago
+        // Pasarela de pagoo
         function checkout() {
             if (cart.length === 0) {
                 alert("Tu carrito está vacío. Agrega algunas obras de arte primero.");
                 return;
             }
             
-            alert("¡Simulacro exitoso! Redirigiendo a la pasarela de pago segura de Najani...");
+            // Cerrar el drawer del carrito si está abierto
+            const sidebar = document.getElementById('cart-sidebar');
+            if (sidebar.classList.contains('open')) {
+                toggleCart();
+            }
+
+            // Renderizar resumen en la pasarela
+            const summaryContainer = document.getElementById('summary-items');
+            const summaryTotal = document.getElementById('summary-total-price');
             
-            // Limpiar carrito "
-            cart = [];
-            updateCartUI();
-            toggleCart();
+            summaryContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                summaryContainer.innerHTML += `
+                    <div class="summary-item">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <img src="${item.image}" alt="${item.name}">
+                            <div>
+                                <strong>${item.name}</strong><br>
+                                <small style="color: #666;">Cant: ${item.quantity}</small>
+                            </div>
+                        </div>
+                        <span>$${(item.price * item.quantity).toLocaleString('es-ES', { minimumFractionDigits: 2 })}</span>
+                    </div>
+                `;
+            });
+
+            summaryTotal.innerText = `$${total.toLocaleString('es-ES', { minimumFractionDigits: 2 })}`;
+
+            // Restablecer vistas si se hizo una compra previa
+            document.getElementById('checkout-content').style.display = 'grid';
+            document.getElementById('success-screen').style.display = 'none';
+
+            // Navegar a la página de pasarela
+            showPage('pasarela');
         }
     </script>
 </body>
