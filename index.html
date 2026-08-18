@@ -1411,24 +1411,24 @@
                 <h3>Tu arte merece ser visto.</h3>
                 <p>Cada trazo, color e idea refleja quién eres. En NAJANI queremos ayudarte a llevar tu creatividad más lejos, brindándote un espacio donde puedas mostrar tu trabajo, inspirar a otros y crecer como artista. Contáctanos y comienza a compartir tu esencia con el mundo.</p>
                 
-                <form onsubmit="event.preventDefault();">
+                <form id="contact-form" onsubmit="sendContactForm(event)">
                     <div>
                         <label style="font-size: 0.8rem; color: #555;">Nombre</label>
-                        <input type="text" placeholder="Javier">
+                        <input type="text" id="contact-name" placeholder="Javier" required>
                     </div>
                     <div>
                         <label style="font-size: 0.8rem; color: #555;">Apellido</label>
-                        <input type="text" placeholder="Guadarrama">
+                        <input type="text" id="contact-lastname" placeholder="Guadarrama" required>
                     </div>
                     <div class="full-width">
                         <label style="font-size: 0.8rem; color: #555;">Dirección de correo electrónico</label>
-                        <input type="email" placeholder="uncorreogenerico@correo.net">
+                        <input type="email" id="contact-email" placeholder="uncorreogenerico@correo.net" required>
                     </div>
                     <div class="full-width">
                         <label style="font-size: 0.8rem; color: #555;">Mensaje</label>
-                        <textarea placeholder="Introduzca su pregunta o mensaje"></textarea>
+                        <textarea id="contact-message" placeholder="Introduzca su pregunta o mensaje" required></textarea>
                     </div>
-                    <button class="btn-submit">Enviar</button>
+                    <button type="submit" id="contact-submit-btn" class="btn-submit">Enviar</button>
                 </form>
             </div>
             <div class="contacto-img">
@@ -1763,6 +1763,66 @@
                 });
         }
 
+        // ===== Formulario de Contacto (EmailJS) =====
+        // 👇 Único dato que debes reemplazar: el ID de tu plantilla de EmailJS para el formulario de contacto
+        const CONTACT_TEMPLATE_ID = 'template_oylxxsj';
+
+        function sendContactForm(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('contact-submit-btn');
+            const originalText = submitBtn.innerText;
+
+            const nombre = document.getElementById('contact-name').value;
+            const apellido = document.getElementById('contact-lastname').value;
+            const email = document.getElementById('contact-email').value;
+            const mensaje = document.getElementById('contact-message').value;
+            const nombreCompleto = `${nombre} ${apellido}`.trim();
+
+            submitBtn.innerText = "Enviando...";
+            submitBtn.style.opacity = "0.7";
+            submitBtn.disabled = true;
+
+            const fechaEnvio = new Date().toLocaleString('es-CO', {
+                dateStyle: 'long',
+                timeStyle: 'short',
+                timeZone: 'America/Bogota'
+            });
+
+            const templateParams = {
+                name: nombreCompleto,
+                email: email,
+                message: mensaje,
+                time: fechaEnvio,
+                title: nombreCompleto
+            };
+
+            emailjs.send('service_ryj3zpn', CONTACT_TEMPLATE_ID, templateParams)
+                .then(function(response) {
+                    console.log('MENSAJE DE CONTACTO ENVIADO!', response.status, response.text);
+
+                    submitBtn.innerText = "¡Enviado! ✓";
+                    form.reset();
+
+                    setTimeout(() => {
+                        submitBtn.innerText = originalText;
+                        submitBtn.style.opacity = "1";
+                        submitBtn.disabled = false;
+                    }, 2500);
+
+                }, function(error) {
+                    console.error('ERROR AL ENVIAR MENSAJE DE CONTACTO...', error);
+                    const motivo = error.text || error.message || "Error desconocido";
+                    alert("No se pudo enviar tu mensaje. Motivo: " + motivo);
+
+                    submitBtn.innerText = originalText;
+                    submitBtn.style.opacity = "1";
+                    submitBtn.disabled = false;
+                });
+        }
+
+        // ===== Asistente Geisha (100% simulado, sin backend real) =====
         const geishaResponses = {
             saludo: ["¡Hola de nuevo! ¿Cómo puedo ayudarte?", "¡Bienvenido a Najani! Cuéntame qué buscas."],
             precio: ["Nuestras obras van desde $40.000 hasta $180.000 aprox. Puedes verlas todas en la sección Arte.", "Los precios varían según la obra. Echa un vistazo a nuestra colección en 'Arte'."],
