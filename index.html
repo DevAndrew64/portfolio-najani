@@ -365,7 +365,7 @@
         .cart-sidebar {
             position: fixed;
             top: 0;
-            left: -400px; /* Oculto por defecto */
+            left: -400px; 
             width: 350px;
             height: 100vh;
             background: #fff;
@@ -640,6 +640,171 @@
             font-weight: bold;
             color: var(--gold);
             margin-bottom: 20px;
+        }
+
+        /* Pasarela de pago - ulti */
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 40px auto 80px;
+            text-align: left;
+        }
+
+        @media (max-width: 850px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .checkout-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .checkout-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Tarjeta visual simulada */
+        .credit-card-preview {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 180px;
+            font-family: monospace;
+        }
+
+        .card-chip {
+            width: 40px;
+            height: 30px;
+            background: #d4af37;
+            border-radius: 5px;
+        }
+
+        .card-number-display {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+        }
+
+        .card-details-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        /* Formulario de Pago */
+        .payment-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .payment-form .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--gold);
+            outline: none;
+        }
+
+        .btn-pay {
+            background: var(--gold);
+            color: #fff;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-pay:hover {
+            background: #a88544;
+            transform: translateY(-2px);
+        }
+
+        /* Resumen del Pedido */
+        .summary-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+        }
+
+        .summary-item img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-top: 2px solid var(--text-main);
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        /* Pantalla de Éxito */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #22c55e;
+            margin-bottom: 15px;
         }
         
     </style>
