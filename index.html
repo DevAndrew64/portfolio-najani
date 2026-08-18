@@ -138,7 +138,7 @@
         .hero { 
             height: 70vh; 
             background-color: #1a1a1a;
-            background-image: url('https://6a5fc09fcfa91e42ab6b98f2.imgix.net/venus_recortada.jpg.jpeg'); 
+            background-image: url('https://6a849429ca5c68e1f896d950.imgix.net/pexels-ludvighedenborg-11258492.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -266,6 +266,38 @@
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Encabezado de sección elegante (reemplaza el cuadro negro) */
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 10px;
+        }
+
+        .section-title .cursive {
+            margin-bottom: 0;
+            color: var(--text-main);
+            white-space: nowrap;
+        }
+
+        .title-line {
+            flex: 1;
+            max-width: 140px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+
+        .title-line.right {
+            background: linear-gradient(to left, transparent, var(--gold));
+        }
+
+        @media (max-width: 768px) {
+            .title-line {
+                max-width: 60px;
+            }
         }
         @media (max-width: 768px) {
 
@@ -1043,7 +1075,11 @@
         </section>
 
         <section class="section-container">
-            <h2 class="cursive reveal" style="background: #111; color:#fff; display:inline-block; padding: 0 40px;">Galeria</h2>
+            <div class="section-title reveal">
+                <span class="title-line"></span>
+                <h2 class="cursive">Galeria</h2>
+                <span class="title-line right"></span>
+            </div>
             <div class="galeria-grid">
                 <div class="galeria-item reveal">
                     <img src="https://6a5fc09fcfa91e42ab6b98f2.imgix.net/cayendo_nubes.jpeg" class="gold-frame" alt="Arte">
